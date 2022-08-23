@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.Deepali.model.Contact;
 
-public interface Service {
+public interface Servicel {
 	
 	public boolean saveContact(Contact contact);
 	
