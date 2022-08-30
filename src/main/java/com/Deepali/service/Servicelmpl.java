@@ -2,6 +2,8 @@ package com.Deepali.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,15 +29,28 @@ public class Servicelmpl  implements Servicel{
 	@Override
 	public List<Contact> getAllContact() {
 		List<Contact> findAll = contactRepository.findAll();
-		return findAll;
+		Stream<Contact> stream = findAll.stream();
+        Stream<Contact> filter = stream.filter(contact -> contact.getActiveSwitch() =='Y');
+        		List<Contact> collect = filter.collect(Collectors.toList());
+
+return collect;
+		
 	}
 
 	@Override
 	public Contact getByContactId(Integer contactId) {
 		Contact findById = contactRepository.findById(contactId).get();
 		return findById;
-	}
+		}
+          public Optional<Contact> getContactById(Integer contactId) {
+		  Optional<Contact> findById = contactRepository.findById(contactId);
+		  if(findById.isPresent()) {
+			return findById;
+		  }else {
+			  return null;
+		  }
 
+	}
 	@Override
 	public boolean updateContact(Contact contact) {
 		Contact update = contactRepository.save(contact);
@@ -46,5 +61,18 @@ public class Servicelmpl  implements Servicel{
 		}
 		
 	}
+	
+	@Override
+	public boolean deleteById(Integer cid) {
+		boolean existsById = contactRepository.existsById(cid);
+		if (existsById) {
+			contactRepository.deleteById(cid);
+			return true;
+		} else {
+
+			return false;
+		}
+		 }
+
 
 }

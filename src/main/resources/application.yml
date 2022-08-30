@@ -1,0 +1,31 @@
+server:
+  port: 9090
+spring:
+  datasource:
+    dbcp2:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    password: root
+    url: jdbc:mysql://localhost:3306/PBA
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+      
+      
+app1:
+ messages:
+   saveSuccess: contact save successfully  
+   saveFail: contact not save successfully  
+   updateSuccess: contact update successfully  
+   updateFail: contact  not update  successfully 
+   deleteSuccess: record deleted  successfully   
+   deletefail: record not deleted  successfully 
+   
+   
